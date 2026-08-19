@@ -1,7 +1,8 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { fetchJobs } from "@/lib/api";
-import { formatSalary } from "@/lib/constants";
+import { formatSalary, JOB_CATEGORIES, PREFECTURES, EMPLOYMENT_TYPES } from "@/lib/constants";
+import { Reveal } from "./components/Reveal";
 
 export const metadata: Metadata = {
   title: "Recrive｜想像以上の仕事に出会おう。医療・介護の求人サイト",
@@ -80,30 +81,52 @@ export default async function HomePage() {
         <div className="pointer-events-none absolute -top-16 -right-16 w-72 h-72 rounded-full bg-gold-400/40 blur-2xl" />
         <div className="pointer-events-none absolute top-40 -left-24 w-64 h-64 rounded-full bg-brand-200/50 blur-2xl" />
 
-        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 pt-20 pb-16 text-center">
-          <p className="text-brand-600 font-bold tracking-[0.2em] text-xs sm:text-sm mb-5 uppercase">Care meets Career</p>
-          <h1 className="text-3xl sm:text-6xl font-black tracking-tight mb-6 leading-tight">
-            想像以上の仕事に、<br />出会おう。
-          </h1>
-          <p className="text-base sm:text-lg font-bold text-slate-700 mb-6 leading-relaxed">
-            あなたの「こう働きたい」から探す、<br className="sm:hidden" />
-            医療・介護に特化した求人サイト。
-          </p>
-          <p className="text-slate-500 max-w-xl mx-auto mb-10 leading-relaxed">
-            給与や勤務地だけではなく、あなたの経験、価値観、これから叶えたいことまで。
-            Recriveが、あなたに合う仕事との出会いをつくります。
-          </p>
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 pt-14 sm:pt-20 pb-16 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div className="text-center lg:text-left">
+            <p className="text-brand-600 font-bold tracking-[0.2em] text-xs sm:text-sm mb-5 uppercase">Care meets Career</p>
+            <h1 className="text-4xl sm:text-6xl font-black tracking-tight mb-6 leading-[1.15]">
+              想像以上の<br />仕事に出会おう。
+            </h1>
+            <p className="text-base sm:text-lg font-bold text-slate-700 mb-6 leading-relaxed">
+              あなたの「こう働きたい」から探す、<br className="sm:hidden" />
+              医療・介護に特化した求人サイト。
+            </p>
+            <p className="text-slate-500 max-w-md mx-auto lg:mx-0 mb-10 leading-relaxed">
+              給与や勤務地だけではなく、あなたの経験、価値観、これから叶えたいことまで。
+              Recriveが、あなたに合う仕事との出会いをつくります。
+            </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-5">
-            <PrimaryCta className="w-full sm:w-auto" />
-            <SecondaryCta className="w-full sm:w-auto" />
+            <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-3 mb-5">
+              <PrimaryCta className="w-full sm:w-auto" />
+              <SecondaryCta className="w-full sm:w-auto" />
+            </div>
+            <p className="text-xs text-slate-400">登録・相談無料｜今すぐ転職しない方もOK</p>
           </div>
-          <p className="text-xs text-slate-400">登録・相談無料｜今すぐ転職しない方もOK</p>
+
+          <div className="relative mx-auto w-full max-w-md lg:max-w-none">
+            <div className="relative aspect-[4/5] sm:aspect-[5/4] lg:aspect-[4/5] rounded-[2.5rem] bg-gradient-to-br from-brand-500 via-brand-600 to-brand-700 overflow-hidden shadow-xl">
+              <div className="absolute -bottom-10 -right-10 w-56 h-56 rounded-full bg-gold-400/30 blur-2xl" />
+              <div className="absolute -top-10 -left-10 w-48 h-48 rounded-full bg-white/10 blur-2xl" />
+              <div className="relative h-full flex flex-col items-center justify-center text-center px-8">
+                <svg className="w-16 h-16 text-white/90 mb-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 21s-7.5-4.6-10-9.5C.5 7.8 2.7 4 6.5 4c2 0 3.4 1 5.5 3.2C14.1 5 15.5 4 17.5 4 21.3 4 23.5 7.8 22 11.5 19.5 16.4 12 21 12 21Z" />
+                </svg>
+                <p className="text-white text-lg sm:text-xl font-bold leading-relaxed">
+                  笑顔で働ける場所を、<br />一緒に見つけよう。
+                </p>
+              </div>
+            </div>
+            <div className="hidden sm:block absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-lg px-5 py-4 max-w-[220px]">
+              <p className="text-xs text-slate-400 mb-1">Recriveのご利用</p>
+              <p className="text-2xl font-black text-brand-600">¥0</p>
+              <p className="text-xs text-slate-500">求職者の方は完全無料</p>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* 02 共感セクション */}
-      <section className="max-w-3xl mx-auto px-4 sm:px-6 py-20 text-center">
+      <Reveal className="max-w-3xl mx-auto px-4 sm:px-6 py-20 text-center block">
         <Eyebrow>About Recrive</Eyebrow>
         <h2 className="text-xl sm:text-3xl font-black mb-8 leading-relaxed">
           「条件がいい」だけで、<br className="sm:hidden" />本当にいい仕事ですか？
@@ -120,11 +143,11 @@ export default async function HomePage() {
             あなた自身の「想い」や「価値観」まで大切にします。
           </p>
         </div>
-      </section>
+      </Reveal>
 
       {/* 03 Recriveのコンセプト */}
-      <section className="bg-slate-50">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 py-20 text-center">
+      <section id="vision" className="bg-slate-50 scroll-mt-16">
+        <Reveal className="max-w-3xl mx-auto px-4 sm:px-6 py-20 text-center block">
           <Eyebrow>Our Vision</Eyebrow>
           <h2 className="text-xl sm:text-3xl font-black mb-6 leading-relaxed">
             仕事を探す。<br className="sm:hidden" />だけじゃない。
@@ -138,7 +161,7 @@ export default async function HomePage() {
             Recriveは、一人ひとりのキャリアに向き合い、
             「あなたらしく働ける場所」を一緒に探します。
           </p>
-        </div>
+        </Reveal>
       </section>
 
       {/* 04 求人検索 */}
@@ -148,13 +171,20 @@ export default async function HomePage() {
           <h2 className="text-xl sm:text-3xl font-black">あなたは、どんな働き方がしたい？</h2>
         </div>
 
-        <form action="/jobs" className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg border border-slate-100 p-3 flex flex-col sm:flex-row gap-2 mb-5">
-          <input
-            name="keyword"
-            placeholder="「訪問看護」「デイサービス」「未経験」「日勤のみ」など"
-            className="flex-1 px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
-          />
-          <button type="submit" className="bg-brand-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-brand-700 transition">
+        <form action="/jobs" className="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg border border-slate-100 p-3 flex flex-col sm:flex-row gap-2 mb-5">
+          <select name="category" defaultValue="" className="flex-1 px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white">
+            <option value="">職種</option>
+            {JOB_CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
+          </select>
+          <select name="prefecture" defaultValue="" className="flex-1 px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white">
+            <option value="">勤務地</option>
+            {PREFECTURES.map((p) => <option key={p} value={p}>{p}</option>)}
+          </select>
+          <select name="employmentType" defaultValue="" className="flex-1 px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white">
+            <option value="">働き方</option>
+            {EMPLOYMENT_TYPES.map((t) => <option key={t} value={t}>{t}</option>)}
+          </select>
+          <button type="submit" className="bg-brand-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-brand-700 transition whitespace-nowrap">
             求人を探す
           </button>
         </form>
@@ -206,7 +236,7 @@ export default async function HomePage() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-4">
           {VALUE_STEPS.map((s, i) => (
-            <div key={s.no} className="relative text-center px-2">
+            <Reveal key={s.no} className="relative text-center px-2 block">
               <p className="text-4xl font-black text-brand-100 mb-2">{s.no}</p>
               <p className="text-xs font-bold text-brand-600 tracking-widest uppercase mb-2">{s.when}</p>
               <h3 className="font-bold text-base mb-2">{s.question}</h3>
@@ -214,7 +244,7 @@ export default async function HomePage() {
               {i < VALUE_STEPS.length - 1 && (
                 <span className="hidden sm:block absolute top-6 -right-2 text-brand-200 text-xl">→</span>
               )}
-            </div>
+            </Reveal>
           ))}
         </div>
       </section>

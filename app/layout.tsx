@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import "./globals.css";
 import { FloatingConsultBar } from "./components/FloatingConsultBar";
+import { Header } from "./components/Header";
 
 const notoSansJP = Noto_Sans_JP({
   variable: "--font-noto-sans-jp",
@@ -24,31 +25,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="ja" className={`${notoSansJP.variable} h-full`}>
       <body className="min-h-full flex flex-col antialiased bg-white text-slate-900">
-        <header className="border-b border-slate-100 sticky top-0 bg-white/95 backdrop-blur z-40">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-2">
-              <Image src="/logo.png" alt="Recrive" width={561} height={192} className="h-9 w-auto" priority />
-              <span className="hidden sm:inline text-xs text-slate-400">医療・介護の求人サイト</span>
-            </Link>
-            <nav className="flex items-center gap-4 sm:gap-6 text-sm font-medium">
-              <Link href="/jobs" className="hidden sm:inline text-slate-600 hover:text-brand-600 transition">求人を探す</Link>
-              <Link href="/jobs?category=看護師" className="hidden sm:inline text-slate-600 hover:text-brand-600 transition">看護師</Link>
-              <Link href="/jobs?category=介護職" className="hidden sm:inline text-slate-600 hover:text-brand-600 transition">介護職</Link>
-              <Link
-                href="/consult"
-                className="border border-brand-600 text-brand-600 px-3 sm:px-4 py-2 rounded-full hover:bg-brand-50 transition whitespace-nowrap"
-              >
-                無料相談
-              </Link>
-              <Link
-                href="/jobs"
-                className="bg-brand-600 text-white px-3 sm:px-4 py-2 rounded-full hover:bg-brand-700 transition whitespace-nowrap"
-              >
-                求人を探す
-              </Link>
-            </nav>
-          </div>
-        </header>
+        <Header />
 
         <main className="flex-1 pb-28">{children}</main>
 
