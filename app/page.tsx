@@ -1,178 +1,319 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { fetchJobs } from "@/lib/api";
 import { formatSalary } from "@/lib/constants";
 
+export const metadata: Metadata = {
+  title: "Recrive｜想像以上の仕事に出会おう。医療・介護の求人サイト",
+  description:
+    "看護師・介護士など医療・介護業界の求人を探すならRecrive。給与や勤務地だけではなく、あなたの「こう働きたい」から、自分に合った仕事を探せます。求人検索・応募・キャリア相談まで無料で利用できます。",
+};
+
 const STRENGTHS = [
   {
+    no: "01",
     title: "医療・介護に特化",
-    desc: "看護師・介護職に絞ることで、現場を深く理解したご提案ができます。",
+    desc: "看護師・介護職をはじめ、医療・介護業界の求人に特化。業界を知っているからこそ、あなたの経験や希望に合った仕事探しをサポートできます。",
     icon: (
       <path d="M12 4.5c-1.7-2-4.6-2.3-6.5-.6-2 1.8-2.1 4.9-.2 6.8L12 18l6.7-7.3c1.9-1.9 1.8-5-.2-6.8-1.9-1.7-4.8-1.4-6.5.6Z" />
     ),
   },
   {
-    title: "その場で直接応募",
-    desc: "気になる求人ページからすぐに応募可能。面倒な会員登録は不要です。",
+    no: "02",
+    title: "気になる求人に、すぐ応募",
+    desc: "「この求人、気になる。」そう思ったら、その場ですぐ応募できます。面倒な会員登録は不要。気軽に仕事探しを始められます。",
     icon: <path d="M13 3 4 14h6l-1 7 9-11h-6l1-7Z" />,
   },
   {
-    title: "ご利用は完全無料",
-    desc: "施設様から紹介料をいただく仕組みのため、費用は一切かかりません。",
+    no: "03",
+    title: "利用料は完全無料",
+    desc: "求職者の方の利用料は0円。求人への応募からキャリア相談まで、費用は一切かかりません。",
     icon: <path d="M12 2v20M8 6h6.5a2.5 2.5 0 0 1 0 5H9.5a2.5 2.5 0 0 0 0 5H16" />,
   },
   {
-    title: "専任アドバイザーが伴走",
-    desc: "応募後は専任のキャリアアドバイザーが転職活動をしっかりサポートします。",
+    no: "04",
+    title: "キャリアアドバイザーが伴走",
+    desc: "「どの求人が自分に合うかわからない」「今の職場を辞めるべきかわからない」そんな悩みも大丈夫。アドバイザーが転職活動をサポートします。",
     icon: <path d="M17 20v-1a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v1M15 3.3a4 4 0 0 1 0 7.4M21 20v-1a4 4 0 0 0-3-3.9M11 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />,
   },
 ];
+
+const VALUE_STEPS = [
+  { no: "01", when: "これまで", question: "何を大切に働いてきた？", desc: "これまでの経験やキャリアを整理する。" },
+  { no: "02", when: "これから", question: "どんな働き方をしたい？", desc: "理想の働き方や、これから挑戦したいことを考える。" },
+  { no: "03", when: "そして", question: "どんな未来をつくりたい？", desc: "仕事だけではなく、人生そのものを考えた仕事選びへ。" },
+];
+
+function PrimaryCta({ className = "" }: { className?: string }) {
+  return (
+    <Link
+      href="/jobs"
+      className={`inline-block text-center bg-brand-600 text-white font-bold px-8 py-4 rounded-full shadow-lg hover:bg-brand-700 transition ${className}`}
+    >
+      求人を探す
+    </Link>
+  );
+}
+
+function SecondaryCta({ label = "キャリアについて無料相談する", className = "" }: { label?: string; className?: string }) {
+  return (
+    <Link
+      href="/consult"
+      className={`inline-block text-center border-2 border-brand-600 text-brand-600 font-bold px-8 py-4 rounded-full hover:bg-brand-50 transition bg-white ${className}`}
+    >
+      {label}
+    </Link>
+  );
+}
+
+function Eyebrow({ children }: { children: React.ReactNode }) {
+  return <p className="text-center text-brand-600 font-bold tracking-[0.2em] text-xs uppercase mb-3">{children}</p>;
+}
 
 export default async function HomePage() {
   const { jobs: featuredJobs } = await fetchJobs({ page: 1 });
 
   return (
     <div>
-      {/* Hero */}
+      {/* 01 ファーストビュー */}
       <section className="relative overflow-hidden bg-gradient-to-b from-brand-50 via-brand-50/60 to-white">
         <div className="pointer-events-none absolute -top-16 -right-16 w-72 h-72 rounded-full bg-gold-400/40 blur-2xl" />
         <div className="pointer-events-none absolute top-40 -left-24 w-64 h-64 rounded-full bg-brand-200/50 blur-2xl" />
 
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 pt-20 pb-16 text-center">
-          <p className="text-brand-600 font-bold tracking-[0.2em] text-xs sm:text-sm mb-4 uppercase">Care meets Career</p>
-          <p className="font-serif italic text-3xl sm:text-5xl text-brand-700/90 tracking-tight mb-3">
-            Find where you belong.
-          </p>
-          <h1 className="text-2xl sm:text-4xl font-black tracking-tight mb-6 leading-snug">
-            あなたの想いに、<br className="sm:hidden" />いちばん近い仕事を。
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 pt-20 pb-16 text-center">
+          <p className="text-brand-600 font-bold tracking-[0.2em] text-xs sm:text-sm mb-5 uppercase">Care meets Career</p>
+          <h1 className="text-3xl sm:text-6xl font-black tracking-tight mb-6 leading-tight">
+            想像以上の仕事に、<br />出会おう。
           </h1>
-          <p className="text-slate-500 max-w-xl mx-auto mb-10">
-            Recriveは看護師・介護職に特化した求人サイトです。気になる求人を見つけたら、その場ですぐに応募できます。
+          <p className="text-base sm:text-lg font-bold text-slate-700 mb-6 leading-relaxed">
+            あなたの「こう働きたい」から探す、<br className="sm:hidden" />
+            医療・介護に特化した求人サイト。
+          </p>
+          <p className="text-slate-500 max-w-xl mx-auto mb-10 leading-relaxed">
+            給与や勤務地だけではなく、あなたの経験、価値観、これから叶えたいことまで。
+            Recriveが、あなたに合う仕事との出会いをつくります。
           </p>
 
-          <form action="/jobs" className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg border border-slate-100 p-3 flex flex-col sm:flex-row gap-2">
-            <input
-              name="keyword"
-              placeholder="キーワード（例: 訪問看護、正社員 など）"
-              className="flex-1 px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
-            />
-            <button type="submit" className="bg-brand-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-brand-700 transition">
-              求人を探す
-            </button>
-          </form>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-5">
+            <PrimaryCta className="w-full sm:w-auto" />
+            <SecondaryCta className="w-full sm:w-auto" />
+          </div>
+          <p className="text-xs text-slate-400">登録・相談無料｜今すぐ転職しない方もOK</p>
+        </div>
+      </section>
 
-          <div className="flex flex-wrap justify-center gap-2 mt-4">
-            {["看護師", "介護職"].map((c) => (
-              <Link
-                key={c}
-                href={`/jobs?category=${encodeURIComponent(c)}`}
-                className="text-sm bg-white border border-slate-200 rounded-full px-4 py-1.5 hover:border-brand-400 hover:text-brand-600 transition"
-              >
-                {c}の求人
-              </Link>
+      {/* 02 共感セクション */}
+      <section className="max-w-3xl mx-auto px-4 sm:px-6 py-20 text-center">
+        <Eyebrow>About Recrive</Eyebrow>
+        <h2 className="text-xl sm:text-3xl font-black mb-8 leading-relaxed">
+          「条件がいい」だけで、<br className="sm:hidden" />本当にいい仕事ですか？
+        </h2>
+        <div className="text-slate-500 leading-loose text-sm sm:text-base space-y-1">
+          <p>給与が高い。休みが多い。家から近い。</p>
+          <p>もちろん、それも大切。</p>
+          <p className="pt-2 font-bold text-slate-700">
+            でも、本当に大切なのは、<br className="sm:hidden" />
+            「この場所で、これからも働きたい」と思えること。
+          </p>
+          <p className="pt-2">
+            Recriveは、求人票に書かれた条件だけでは見えない<br className="hidden sm:block" />
+            あなた自身の「想い」や「価値観」まで大切にします。
+          </p>
+        </div>
+      </section>
+
+      {/* 03 Recriveのコンセプト */}
+      <section className="bg-slate-50">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 py-20 text-center">
+          <Eyebrow>Our Vision</Eyebrow>
+          <h2 className="text-xl sm:text-3xl font-black mb-6 leading-relaxed">
+            仕事を探す。<br className="sm:hidden" />だけじゃない。
+          </h2>
+          <p className="text-lg sm:text-2xl font-black text-brand-700 mb-8 leading-relaxed">
+            「どんな未来にしたいか」から、<br className="sm:hidden" />仕事を選ぼう。
+          </p>
+          <p className="text-slate-500 leading-loose text-sm sm:text-base">
+            これまでの経験。大切にしていること。これから挑戦したいこと。
+            そして、まだ自分でも気づいていない可能性。
+            Recriveは、一人ひとりのキャリアに向き合い、
+            「あなたらしく働ける場所」を一緒に探します。
+          </p>
+        </div>
+      </section>
+
+      {/* 04 求人検索 */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 py-20">
+        <div className="text-center mb-8">
+          <Eyebrow>Find Your Job</Eyebrow>
+          <h2 className="text-xl sm:text-3xl font-black">あなたは、どんな働き方がしたい？</h2>
+        </div>
+
+        <form action="/jobs" className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg border border-slate-100 p-3 flex flex-col sm:flex-row gap-2 mb-5">
+          <input
+            name="keyword"
+            placeholder="「訪問看護」「デイサービス」「未経験」「日勤のみ」など"
+            className="flex-1 px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+          />
+          <button type="submit" className="bg-brand-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-brand-700 transition">
+            求人を探す
+          </button>
+        </form>
+
+        <div className="flex flex-wrap justify-center gap-2">
+          <Link href="/jobs?category=看護師" className="text-sm bg-white border border-slate-200 rounded-full px-4 py-1.5 hover:border-brand-400 hover:text-brand-600 transition">
+            看護師の求人
+          </Link>
+          <Link href="/jobs?category=介護職" className="text-sm bg-white border border-slate-200 rounded-full px-4 py-1.5 hover:border-brand-400 hover:text-brand-600 transition">
+            介護職の求人
+          </Link>
+          <Link href="/jobs?category=その他" className="text-sm bg-white border border-slate-200 rounded-full px-4 py-1.5 hover:border-brand-400 hover:text-brand-600 transition">
+            その他の医療・介護求人
+          </Link>
+        </div>
+      </section>
+
+      {/* 05 Recriveの強み */}
+      <section className="bg-slate-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+          <div className="text-center mb-10">
+            <Eyebrow>Why Recrive?</Eyebrow>
+            <h2 className="text-xl sm:text-3xl font-black">Recriveだからできること。</h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+            {STRENGTHS.map((f) => (
+              <div key={f.title} className="bg-white rounded-2xl border border-slate-100 p-6 sm:p-7">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-xs font-black text-brand-300">{f.no}</span>
+                  <svg className="w-7 h-7 text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    {f.icon}
+                  </svg>
+                </div>
+                <h3 className="font-bold text-base mb-2">{f.title}</h3>
+                <p className="text-sm text-slate-500 leading-relaxed">{f.desc}</p>
+              </div>
             ))}
-            <Link
-              href="/consult"
-              className="text-sm bg-brand-600 text-white rounded-full px-4 py-1.5 hover:bg-brand-700 transition"
-            >
-              まずは相談する
-            </Link>
           </div>
         </div>
       </section>
 
-      {/* Strengths */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
-        <p className="text-center text-brand-600 font-bold tracking-widest text-xs uppercase mb-2">Strength</p>
-        <h2 className="text-center text-xl sm:text-2xl font-black mb-10">Recriveの強み</h2>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          {STRENGTHS.map((f) => (
-            <div key={f.title} className="bg-white rounded-2xl border border-slate-100 p-5 sm:p-6 text-center">
-              <svg className="w-9 h-9 mx-auto mb-4 text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                {f.icon}
-              </svg>
-              <h3 className="font-bold text-sm sm:text-base mb-2">{f.title}</h3>
-              <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">{f.desc}</p>
+      {/* 06 価値観から仕事を選ぶ */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 py-20">
+        <div className="text-center mb-12">
+          <Eyebrow>Driven by Values</Eyebrow>
+          <h2 className="text-xl sm:text-3xl font-black">
+            条件だけじゃない。<br className="sm:hidden" />「想い」で選ぶ。
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-4">
+          {VALUE_STEPS.map((s, i) => (
+            <div key={s.no} className="relative text-center px-2">
+              <p className="text-4xl font-black text-brand-100 mb-2">{s.no}</p>
+              <p className="text-xs font-bold text-brand-600 tracking-widest uppercase mb-2">{s.when}</p>
+              <h3 className="font-bold text-base mb-2">{s.question}</h3>
+              <p className="text-sm text-slate-500 leading-relaxed">{s.desc}</p>
+              {i < VALUE_STEPS.length - 1 && (
+                <span className="hidden sm:block absolute top-6 -right-2 text-brand-200 text-xl">→</span>
+              )}
             </div>
           ))}
         </div>
       </section>
 
-      {/* Values */}
+      {/* 07 新着求人 */}
       <section className="bg-slate-50">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16 text-center">
-          <p className="text-brand-600 font-bold tracking-widest text-xs uppercase mb-3">Driven by Values</p>
-          <h2 className="text-xl sm:text-3xl font-black mb-6 leading-relaxed">
-            条件だけでなく、<br className="sm:hidden" />想いに寄り添う。
-          </h2>
-          <p className="text-slate-500 leading-loose text-sm sm:text-base">
-            給与や勤務地といった条件だけで職場を選ぶと、長く続く出会いにはなりません。
-            Recriveでは、これまで積み重ねてきたキャリアや大切にしたい働き方、
-            これから叶えたい想いにまで向き合い、本当に合う職場探しをサポートします。
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+          <div className="text-center mb-10">
+            <Eyebrow>New Jobs</Eyebrow>
+            <h2 className="text-xl sm:text-3xl font-black">あなたの「気になる」を見つけよう。</h2>
+          </div>
+          {featuredJobs.length === 0 ? (
+            <p className="text-slate-400 text-center py-12">現在公開中の求人はありません。</p>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
+              {featuredJobs.slice(0, 6).map((job) => (
+                <Link
+                  key={job.slug}
+                  href={`/jobs/${job.slug}`}
+                  className="block bg-white rounded-2xl p-5 hover:shadow-lg hover:border-brand-200 border border-slate-100 transition"
+                >
+                  <span className="inline-block text-xs font-bold text-brand-700 bg-brand-50 rounded-full px-2.5 py-1 mb-3">
+                    {job.category || "求人"}
+                  </span>
+                  <h3 className="font-bold mb-2 leading-snug">{job.title}</h3>
+                  <p className="text-xs text-slate-400 mb-3">{job.companyName}</p>
+                  <div className="text-sm text-slate-600 space-y-1">
+                    <p>{formatSalary(job.salaryMin, job.salaryMax, job.salary)}</p>
+                    <p>{job.prefecture}{job.city}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+          <div className="text-center">
+            <Link href="/jobs" className="text-sm text-brand-600 font-bold hover:underline">すべての求人を見る →</Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 08 転職を迷っている人向け */}
+      <section className="max-w-3xl mx-auto px-4 sm:px-6 py-20 text-center">
+        <Eyebrow>For You</Eyebrow>
+        <h2 className="text-xl sm:text-3xl font-black mb-8 leading-relaxed">
+          まだ、転職すると<br className="sm:hidden" />決めていなくても大丈夫。
+        </h2>
+        <div className="text-slate-500 leading-loose text-sm sm:text-base mb-8 space-y-1">
+          <p>「今の職場に不満はあるけど、辞めるほどではない。」</p>
+          <p>「転職した方がいいのか、まだわからない。」</p>
+          <p>「自分にどんな仕事が合うのかわからない。」</p>
+          <p className="pt-2 font-bold text-slate-700">
+            そんな状態でも大丈夫です。<br />
+            Recriveでは、情報収集だけのご相談も無料で受け付けています。
           </p>
         </div>
+        <SecondaryCta label="まずはキャリアについて相談する" />
+        <p className="text-xs text-slate-400 mt-4">相談無料｜無理な転職の勧誘はありません</p>
       </section>
 
-      {/* Featured Jobs */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-20">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-black">新着求人</h2>
-          <Link href="/jobs" className="text-sm text-brand-600 font-medium hover:underline">すべての求人を見る →</Link>
-        </div>
-        {featuredJobs.length === 0 ? (
-          <p className="text-slate-400 text-center py-12">現在公開中の求人はありません。</p>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {featuredJobs.slice(0, 6).map((job) => (
-              <Link
-                key={job.slug}
-                href={`/jobs/${job.slug}`}
-                className="block bg-white border border-slate-100 rounded-2xl p-5 hover:shadow-lg hover:border-brand-200 transition"
-              >
-                <span className="inline-block text-xs font-bold text-brand-700 bg-brand-50 rounded-full px-2.5 py-1 mb-3">
-                  {job.category || "求人"}
-                </span>
-                <h3 className="font-bold mb-2 leading-snug">{job.title}</h3>
-                <p className="text-xs text-slate-400 mb-3">{job.companyName}</p>
-                <div className="text-sm text-slate-600 space-y-1">
-                  <p>{formatSalary(job.salaryMin, job.salaryMax, job.salary)}</p>
-                  <p>{job.prefecture}{job.city}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        )}
-      </section>
-
-      {/* Reassurance / Consult CTA */}
+      {/* 09 キャリア相談 */}
       <section className="bg-brand-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-16 text-center">
-          <h2 className="text-xl sm:text-2xl font-black mb-8">安心してご利用いただけます</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-            <div className="bg-white rounded-2xl p-6">
-              <p className="font-bold text-slate-800 mb-3">ご利用は完全無料</p>
-              <p className="text-3xl font-black text-brand-600 mb-3">¥0</p>
-              <p className="text-sm text-slate-500 leading-relaxed">
-                医療・介護施設様から紹介料をいただく仕組みのため、求職者の方の費用は一切かかりません。
-              </p>
-            </div>
-            <div className="bg-white rounded-2xl p-6">
-              <p className="font-bold text-slate-800 mb-3">今すぐ転職しない方もOK</p>
-              <svg className="w-10 h-10 mx-auto mb-3 text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M4 4h13a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H9l-4 3v-3H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z" />
-                <path d="M15 15v1a2 2 0 0 1-2 2h-4l-3 2v-2h-1a2 2 0 0 1-2-2v-4" opacity="0.5" />
-              </svg>
-              <p className="text-sm text-slate-500 leading-relaxed">
-                情報収集だけのご相談でも大歓迎です。まずはお気軽にお話しください。
-              </p>
-            </div>
-          </div>
-
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 py-20 text-center">
+          <Eyebrow>Career Support</Eyebrow>
+          <h2 className="text-xl sm:text-3xl font-black mb-8 leading-relaxed">
+            あなたのキャリアに、<br className="sm:hidden" />一緒に向き合う。
+          </h2>
+          <p className="text-slate-500 leading-loose text-sm sm:text-base mb-8">
+            Recriveでは求人を紹介するだけではありません。
+            あなたのこれまでの経験や希望を整理し、
+            「なぜ転職したいのか」「何を変えたいのか」「どんな未来を実現したいのか」を一緒に考えます。
+            そして、その答えに合った求人を探していきます。
+          </p>
           <Link
             href="/consult"
-            className="inline-block bg-brand-600 text-white font-bold px-8 py-4 rounded-full shadow-lg hover:bg-brand-700 transition"
+            className="inline-block text-center bg-brand-600 text-white font-bold px-8 py-4 rounded-full shadow-lg hover:bg-brand-700 transition"
           >
-            Recriveに無料相談する
+            無料でキャリア相談する
           </Link>
+        </div>
+      </section>
+
+      {/* 10 最終CTA */}
+      <section className="max-w-3xl mx-auto px-4 sm:px-6 py-24 sm:py-32 text-center">
+        <h2 className="text-xl sm:text-2xl font-black mb-8 leading-relaxed">
+          あなたの未来は、<br className="sm:hidden" />まだ決まっていない。
+        </h2>
+        <div className="text-slate-500 leading-loose text-sm sm:text-base mb-10 space-y-1">
+          <p>仕事を変えれば、働き方が変わる。</p>
+          <p>働き方が変われば、人生が変わる。</p>
+          <p className="pt-2">だからこそ、次の仕事は妥協して選んでほしくない。</p>
+        </div>
+        <h3 className="text-2xl sm:text-4xl font-black mb-4 leading-tight">想像以上の仕事に出会おう。</h3>
+        <p className="text-slate-500 mb-10">
+          あなたの「こう働きたい」から探す、<br className="sm:hidden" />
+          医療・介護の求人サイト。
+        </p>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <PrimaryCta className="w-full sm:w-auto" />
+          <SecondaryCta className="w-full sm:w-auto" />
         </div>
       </section>
     </div>
