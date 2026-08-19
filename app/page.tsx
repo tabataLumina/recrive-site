@@ -107,8 +107,8 @@ export default async function HomePage() {
           <div className="relative mx-auto w-full max-w-md lg:max-w-none">
             <div className="relative aspect-[4/5] sm:aspect-[5/4] lg:aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-xl">
               <Image
-                src="https://images.unsplash.com/photo-1765896387387-0538bc9f997e?fm=jpg&q=80&w=1200&auto=format&fit=crop"
-                alt="利用者様に笑顔で寄り添う看護師"
+                src="/hero-nurses.jpg"
+                alt="笑顔で働く看護師スタッフ"
                 fill
                 sizes="(min-width: 1024px) 480px, (min-width: 640px) 400px, 90vw"
                 priority
