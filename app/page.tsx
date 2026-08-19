@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { fetchJobs } from "@/lib/api";
 import { formatSalary, JOB_CATEGORIES, PREFECTURES, EMPLOYMENT_TYPES } from "@/lib/constants";
@@ -104,14 +105,18 @@ export default async function HomePage() {
           </div>
 
           <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-            <div className="relative aspect-[4/5] sm:aspect-[5/4] lg:aspect-[4/5] rounded-[2.5rem] bg-gradient-to-br from-brand-500 via-brand-600 to-brand-700 overflow-hidden shadow-xl">
-              <div className="absolute -bottom-10 -right-10 w-56 h-56 rounded-full bg-gold-400/30 blur-2xl" />
-              <div className="absolute -top-10 -left-10 w-48 h-48 rounded-full bg-white/10 blur-2xl" />
-              <div className="relative h-full flex flex-col items-center justify-center text-center px-8">
-                <svg className="w-16 h-16 text-white/90 mb-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 21s-7.5-4.6-10-9.5C.5 7.8 2.7 4 6.5 4c2 0 3.4 1 5.5 3.2C14.1 5 15.5 4 17.5 4 21.3 4 23.5 7.8 22 11.5 19.5 16.4 12 21 12 21Z" />
-                </svg>
-                <p className="text-white text-lg sm:text-xl font-bold leading-relaxed">
+            <div className="relative aspect-[4/5] sm:aspect-[5/4] lg:aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-xl">
+              <Image
+                src="https://images.unsplash.com/photo-1765896387387-0538bc9f997e?fm=jpg&q=80&w=1200&auto=format&fit=crop"
+                alt="利用者様に笑顔で寄り添う看護師"
+                fill
+                sizes="(min-width: 1024px) 480px, (min-width: 640px) 400px, 90vw"
+                priority
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-900/60 via-brand-900/0 to-transparent" />
+              <div className="relative h-full flex flex-col justify-end px-8 pb-8">
+                <p className="text-white text-lg sm:text-xl font-bold leading-relaxed drop-shadow">
                   笑顔で働ける場所を、<br />一緒に見つけよう。
                 </p>
               </div>
