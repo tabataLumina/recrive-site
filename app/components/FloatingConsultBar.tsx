@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { PRIVATE_JOBS_COUNT } from "@/lib/constants";
 
 const HIDE_ON_PREFIXES = ["/consult", "/jobs/"];
 
@@ -34,10 +35,15 @@ export function FloatingConsultBar() {
       }`}
     >
       <div className="max-w-xl mx-auto bg-white border border-brand-100 rounded-2xl shadow-xl p-4 sm:p-5 flex items-center gap-4">
-        <p className="flex-1 text-sm text-slate-600 text-left">
-          まだ求人を決めていない方も大丈夫。<br className="hidden sm:block" />
-          キャリアアドバイザーに無料で相談できます。
-        </p>
+        <div className="flex-1 text-left">
+          <p className="text-[11px] sm:text-xs font-bold text-brand-600 tracking-wide mb-1">
+            非公開求人{PRIVATE_JOBS_COUNT}+件
+          </p>
+          <p className="text-sm text-slate-600">
+            まだ求人を決めていない方も大丈夫。<br className="hidden sm:block" />
+            キャリアアドバイザーに無料で相談できます。
+          </p>
+        </div>
         <Link
           href="/consult"
           className="shrink-0 border-2 border-brand-600 text-brand-600 font-bold px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl hover:bg-brand-50 transition whitespace-nowrap text-sm sm:text-base bg-white"

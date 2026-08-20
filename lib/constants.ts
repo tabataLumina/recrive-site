@@ -12,6 +12,10 @@ export const PREFECTURES = [
 
 export const EMPLOYMENT_TYPES = ["正社員", "契約社員", "パート・アルバイト", "派遣社員", "業務委託"] as const;
 
+// 現時点ではCRM上に非公開求人として個別データ化されていない、実業務ベースの件数。
+// CRM側に件数管理機能を追加でき次第、API経由の動的取得に切り替える。
+export const PRIVATE_JOBS_COUNT = 800;
+
 export function formatSalary(min: number | null, max: number | null, fallback: string): string {
   if (min && max) return `月給${(min / 10000).toFixed(0)}万円〜${(max / 10000).toFixed(0)}万円`;
   if (min) return `月給${(min / 10000).toFixed(0)}万円〜`;

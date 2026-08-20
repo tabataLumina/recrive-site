@@ -2,13 +2,9 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { fetchJobs } from "@/lib/api";
-import { formatSalary, JOB_CATEGORIES, PREFECTURES, EMPLOYMENT_TYPES } from "@/lib/constants";
+import { formatSalary, JOB_CATEGORIES, PREFECTURES, EMPLOYMENT_TYPES, PRIVATE_JOBS_COUNT } from "@/lib/constants";
 import { Reveal } from "./components/Reveal";
 import { CountUp } from "./components/CountUp";
-
-// 現時点ではCRM上に非公開求人として個別データ化されていない、実業務ベースの件数。
-// CRM側に件数管理機能を追加でき次第、API経由の動的取得に切り替える。
-const PRIVATE_JOBS_COUNT = 800;
 
 export const metadata: Metadata = {
   title: "Recrive｜想像以上の仕事に出会おう。医療・介護の求人サイト",
