@@ -46,10 +46,10 @@ const VISION_STEPS = [
   { no: "03", label: "未来", desc: "どんな自分になりたい？" },
 ];
 
-const VALUE_STEPS = [
-  { no: "01", when: "これまで", question: "何を大切に働いてきた？", desc: "これまでの経験やキャリアを整理する。" },
-  { no: "02", when: "これから", question: "どんな働き方をしたい？", desc: "理想の働き方や、これから挑戦したいことを考える。" },
-  { no: "03", when: "そして", question: "どんな未来をつくりたい？", desc: "仕事だけではなく、人生そのものを考えた仕事選びへ。" },
+const FUTURE_STEPS = [
+  { no: "01", label: "これまで", line1: "これまでの経験を振り返る。", line2: "自分が何を大切に働いてきたのかを整理する。" },
+  { no: "02", label: "これから", line1: "理想の働き方を考える。", line2: "どんな環境で、どんな仕事をしたいのかを考える。" },
+  { no: "03", label: "未来", line1: "次のキャリアを選ぶ。", line2: "これまでとこれからをつなげて、自分らしい未来への一歩を選ぶ。" },
 ];
 
 function PrimaryCta({ className = "" }: { className?: string }) {
@@ -228,24 +228,24 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 06 価値観から仕事を選ぶ */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 py-20">
-        <div className="text-center mb-12">
-          <Eyebrow>Driven by Values</Eyebrow>
-          <h2 className="text-xl sm:text-3xl font-black">
-            条件だけじゃない。<br className="sm:hidden" />「想い」で選ぶ。
-          </h2>
+      {/* 06 あなた自身のキャリアを考える */}
+      <section className="max-w-3xl mx-auto px-4 sm:px-6 py-24 sm:py-32 text-center">
+        <Eyebrow>Driven by Your Future</Eyebrow>
+        <h2 className="text-2xl sm:text-4xl font-black mb-10 sm:mb-14 leading-relaxed">
+          あなたの可能性は、<br className="sm:hidden" />まだ決まっていない。
+        </h2>
+        <div className="text-slate-500 leading-loose text-sm sm:text-base mb-16 sm:mb-20 max-w-xl mx-auto">
+          <p>これまでの経験も、これからやりたいことも、まだ気づいていない可能性も。</p>
+          <p className="mt-2">Recriveは、あなた自身のキャリアを整理しながら、次の一歩を一緒に考えます。</p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-4">
-          {VALUE_STEPS.map((s, i) => (
-            <Reveal key={s.no} className="relative text-center px-2 block">
-              <p className="text-4xl font-black text-brand-100 mb-2">{s.no}</p>
-              <p className="text-xs font-bold text-brand-600 tracking-widest uppercase mb-2">{s.when}</p>
-              <h3 className="font-bold text-base mb-2">{s.question}</h3>
-              <p className="text-sm text-slate-500 leading-relaxed">{s.desc}</p>
-              {i < VALUE_STEPS.length - 1 && (
-                <span className="hidden sm:block absolute top-6 -right-2 text-brand-200 text-xl">→</span>
-              )}
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-8">
+          {FUTURE_STEPS.map((s) => (
+            <Reveal key={s.no} className="block">
+              <p className="text-4xl sm:text-5xl font-black text-brand-100 mb-3">{s.no}</p>
+              <p className="text-base font-bold text-slate-800 mb-2">{s.label}</p>
+              <p className="text-sm text-slate-500 leading-relaxed">{s.line1}</p>
+              <p className="text-sm text-slate-500 leading-relaxed">{s.line2}</p>
             </Reveal>
           ))}
         </div>
