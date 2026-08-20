@@ -4,6 +4,11 @@ import type { Metadata } from "next";
 import { fetchJobs } from "@/lib/api";
 import { formatSalary, JOB_CATEGORIES, PREFECTURES, EMPLOYMENT_TYPES } from "@/lib/constants";
 import { Reveal } from "./components/Reveal";
+import { CountUp } from "./components/CountUp";
+
+// 現時点ではCRM上に非公開求人として個別データ化されていない、実業務ベースの件数。
+// CRM側に件数管理機能を追加でき次第、API経由の動的取得に切り替える。
+const PRIVATE_JOBS_COUNT = 800;
 
 export const metadata: Metadata = {
   title: "Recrive｜想像以上の仕事に出会おう。医療・介護の求人サイト",
@@ -163,6 +168,42 @@ export default async function HomePage() {
               </Reveal>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* 03.5 非公開求人カウンター (Private Jobs) */}
+      <section className="bg-brand-50/60">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 py-20 sm:py-28 text-center">
+          <Reveal className="block">
+            <Eyebrow>Private Jobs</Eyebrow>
+            <h2 className="text-xl sm:text-3xl font-black leading-relaxed mb-10 sm:mb-14">
+              Webには載っていない、<br />非公開求人があります。
+            </h2>
+          </Reveal>
+
+          <Reveal className="block mb-10 sm:mb-14">
+            <CountUp
+              target={PRIVATE_JOBS_COUNT}
+              className="block text-7xl sm:text-8xl md:text-9xl font-black text-brand-600 leading-none"
+            />
+            <p className="mt-4 text-sm sm:text-base font-bold text-slate-500 tracking-widest">非公開求人</p>
+          </Reveal>
+
+          <Reveal className="block">
+            <p className="text-slate-500 text-sm sm:text-base leading-loose max-w-xl mx-auto mb-10 sm:mb-12">
+              Recriveでは、一般公開されていない求人も多数ご紹介しています。
+              <br className="hidden sm:block" />
+              あなたの経験や希望に合わせて、
+              <br className="hidden sm:block" />
+              公開求人だけでは見つからない選択肢までご提案します。
+            </p>
+            <Link
+              href="/consult"
+              className="block sm:inline-block w-full sm:w-auto text-center bg-brand-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-brand-700 transition"
+            >
+              非公開求人について相談する
+            </Link>
+          </Reveal>
         </div>
       </section>
 
