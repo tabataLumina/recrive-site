@@ -40,6 +40,12 @@ const STRENGTHS = [
   },
 ];
 
+const VISION_STEPS = [
+  { no: "01", label: "これまで", desc: "何を大切に働いてきた？" },
+  { no: "02", label: "これから", desc: "どんな働き方をしたい？" },
+  { no: "03", label: "未来", desc: "どんな自分になりたい？" },
+];
+
 const VALUE_STEPS = [
   { no: "01", when: "これまで", question: "何を大切に働いてきた？", desc: "これまでの経験やキャリアを整理する。" },
   { no: "02", when: "これから", question: "どんな働き方をしたい？", desc: "理想の働き方や、これから挑戦したいことを考える。" },
@@ -107,23 +113,57 @@ export default async function HomePage() {
         </div>
       </Reveal>
 
-      {/* 03 Recriveのコンセプト */}
-      <section id="vision" className="bg-slate-50 scroll-mt-16">
-        <Reveal className="max-w-3xl mx-auto px-4 sm:px-6 py-20 text-center block">
-          <Eyebrow>Our Vision</Eyebrow>
-          <h2 className="text-xl sm:text-3xl font-black mb-6 leading-relaxed">
-            仕事を探す。<br className="sm:hidden" />だけじゃない。
-          </h2>
-          <p className="text-lg sm:text-2xl font-black text-brand-700 mb-8 leading-relaxed">
-            「どんな未来にしたいか」から、<br className="sm:hidden" />仕事を選ぼう。
-          </p>
-          <p className="text-slate-500 leading-loose text-sm sm:text-base">
-            これまでの経験。大切にしていること。これから挑戦したいこと。
-            そして、まだ自分でも気づいていない可能性。
-            Recriveは、一人ひとりのキャリアに向き合い、
-            「あなたらしく働ける場所」を一緒に探します。
-          </p>
-        </Reveal>
+      {/* 03 Recriveのコンセプト (Vision) */}
+      <section id="vision" className="bg-white scroll-mt-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-20 sm:py-28">
+          <div className="grid grid-cols-1 lg:grid-cols-[57%_43%] gap-10 lg:gap-16 lg:items-center lg:min-h-[680px]">
+            <Reveal className="block">
+              <div className="relative w-full aspect-[4/5] sm:aspect-[16/10] lg:aspect-[4/5] rounded-[28px] overflow-hidden">
+                <Image
+                  src="/vision-nurses.jpg"
+                  alt="青空の下で笑顔を見せる3人の医療従事者"
+                  fill
+                  sizes="(min-width: 1024px) 620px, 100vw"
+                  className="object-cover"
+                  style={{ objectPosition: "58% 38%" }}
+                />
+              </div>
+            </Reveal>
+
+            <div>
+              <Reveal className="block">
+                <p className="text-brand-600 font-bold tracking-[0.2em] text-xs uppercase mb-4">Our Vision</p>
+                <h2 className="text-2xl sm:text-4xl font-black leading-snug mb-8 sm:mb-10">
+                  条件だけじゃない。<br />「想い」で選ぶ。
+                </h2>
+                <div className="space-y-3 text-slate-500 text-sm sm:text-base leading-loose max-w-[480px] mb-14 sm:mb-16">
+                  <p>給与や勤務地だけでは、あなたに合う仕事は決められない。</p>
+                  <p>
+                    これまで何を大切に働いてきたのか。<br />
+                    これからどんな働き方をしたいのか。<br />
+                    そして、どんな未来をつくりたいのか。
+                  </p>
+                  <p className="font-bold text-slate-700">
+                    Recriveは、求人票だけでは見えないあなたの「想い」まで大切にします。
+                  </p>
+                </div>
+              </Reveal>
+
+              <Reveal className="block relative">
+                <div className="hidden sm:block absolute top-[22px] left-[7%] right-[7%] h-px bg-brand-200" />
+                <div className="relative grid grid-cols-3 gap-3 sm:gap-6">
+                  {VISION_STEPS.map((s) => (
+                    <div key={s.no}>
+                      <p className="relative z-10 inline-block bg-white pr-3 sm:pr-4 text-3xl sm:text-4xl font-black text-brand-200">{s.no}</p>
+                      <p className="text-sm font-bold text-slate-700 mt-2">{s.label}</p>
+                      <p className="text-xs text-slate-400 mt-1 leading-relaxed">{s.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* 04 求人検索 */}
