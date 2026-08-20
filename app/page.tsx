@@ -89,14 +89,16 @@ export default async function HomePage() {
   return (
     <div>
       {/* 01 ファーストビュー */}
-      <Image
-        src="/hero-banner.png"
-        alt="医療・福祉に、笑顔をつなぐ。Recrive"
-        width={1536}
-        height={1024}
-        priority
-        className="w-full h-auto"
-      />
+      <div id="hero">
+        <Image
+          src="/hero-banner.png"
+          alt="医療・福祉に、笑顔をつなぐ。Recrive"
+          width={1536}
+          height={1024}
+          priority
+          className="w-full h-auto"
+        />
+      </div>
 
       {/* 02 共感セクション */}
       <Reveal className="max-w-3xl mx-auto px-4 sm:px-6 py-20 text-center block">
