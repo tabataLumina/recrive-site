@@ -40,6 +40,43 @@ const STRENGTHS = [
   },
 ];
 
+const HERO_POINTS = [
+  {
+    title: "最適な出会いを\nサポート",
+    icon: (
+      <>
+        <path d="M8 20v-1a3 3 0 0 1 3-3h2a3 3 0 0 1 3 3v1" />
+        <circle cx="12" cy="10" r="2.6" />
+        <path d="M4 20v-.6A2.4 2.4 0 0 1 6.4 17H7" />
+        <path d="M20 20v-.6A2.4 2.4 0 0 0 17.6 17H17" />
+        <circle cx="5.5" cy="9" r="1.8" />
+        <circle cx="18.5" cy="9" r="1.8" />
+        <path d="M12 4.6c-.6-.9-1.8-1.1-2.5-.2-.8.9-.4 1.9.5 2.6l2 1.6 2-1.6c.9-.7 1.3-1.7.5-2.6-.7-.9-1.9-.7-2.5.2Z" />
+      </>
+    ),
+  },
+  {
+    title: "信頼できる\n人材紹介",
+    icon: (
+      <>
+        <path d="M12 20.5s-6.5-4-8.6-8.2C1.9 9.3 3.4 6 6.6 6c1.7 0 2.9.9 5.4 3.4C14.5 6.9 15.7 6 17.4 6c3.2 0 4.7 3.3 3.2 6.3-2.1 4.2-8.6 8.2-8.6 8.2Z" />
+        <path d="M9.5 12h1.4l1-1.6 1.4 2.8 1-1.2H16" />
+      </>
+    ),
+  },
+  {
+    title: "未来を育てる\nパートナー",
+    icon: (
+      <>
+        <path d="M12 21c-3.5-.5-6-2.7-6-6.5V13c1.6 0 3 .5 4 1.5" />
+        <path d="M12 13V21" />
+        <path d="M12 13c0-4 2-6.5 6-7-1 3.5-1.5 6-6 7Z" />
+        <path d="M12 13c0-3.2-1.6-5-4.5-5.6.4 2.8 1.4 4.6 4.5 5.6Z" />
+      </>
+    ),
+  },
+];
+
 const VALUE_STEPS = [
   { no: "01", when: "これまで", question: "何を大切に働いてきた？", desc: "これまでの経験やキャリアを整理する。" },
   { no: "02", when: "これから", question: "どんな働き方をしたい？", desc: "理想の働き方や、これから挑戦したいことを考える。" },
@@ -78,24 +115,31 @@ export default async function HomePage() {
   return (
     <div>
       {/* 01 ファーストビュー */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-brand-50 via-brand-50/60 to-white">
-        <div className="pointer-events-none absolute -top-16 -right-16 w-72 h-72 rounded-full bg-gold-400/40 blur-2xl" />
-        <div className="pointer-events-none absolute top-40 -left-24 w-64 h-64 rounded-full bg-brand-200/50 blur-2xl" />
-
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 pt-14 sm:pt-20 pb-16 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+      <section className="relative overflow-hidden bg-gradient-to-b from-brand-50/50 via-white to-white">
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16 pb-16 lg:pb-24 grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-12 lg:gap-8 items-center">
           <div className="text-center lg:text-left">
-            <p className="text-brand-600 font-bold tracking-[0.2em] text-xs sm:text-sm mb-5 uppercase">Care meets Career</p>
-            <h1 className="text-4xl sm:text-6xl font-black tracking-tight mb-6 leading-[1.15]">
-              想像以上の<br />仕事に出会おう。
+            <h1 className="leading-tight mb-5">
+              <span className="block text-3xl sm:text-4xl font-black text-slate-900">医療・福祉に、</span>
+              <span className="block text-4xl sm:text-5xl font-black text-brand-600 mt-1">笑顔をつなぐ。</span>
             </h1>
-            <p className="text-base sm:text-lg font-bold text-slate-700 mb-6 leading-relaxed">
-              あなたの「こう働きたい」から探す、<br className="sm:hidden" />
-              医療・介護に特化した求人サイト。
-            </p>
+            <div className="w-28 mx-auto lg:mx-0 mb-6 border-t-2 border-dotted border-brand-300" />
             <p className="text-slate-500 max-w-md mx-auto lg:mx-0 mb-10 leading-relaxed">
-              給与や勤務地だけではなく、あなたの経験、価値観、これから叶えたいことまで。
-              Recriveが、あなたに合う仕事との出会いをつくります。
+              人と人、想いと未来をつなぐパートナーとして<br className="hidden sm:block" />
+              医療・福祉の現場に、より良い出会いを。
             </p>
+
+            <div className="grid grid-cols-3 gap-3 sm:gap-5 max-w-sm mx-auto lg:mx-0 mb-10">
+              {HERO_POINTS.map((p) => (
+                <div key={p.title}>
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto lg:mx-0 mb-2 rounded-full border-2 border-brand-200 bg-white flex items-center justify-center text-brand-600">
+                    <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      {p.icon}
+                    </svg>
+                  </div>
+                  <p className="text-xs font-bold text-slate-600 leading-snug whitespace-pre-line text-center lg:text-left">{p.title}</p>
+                </div>
+              ))}
+            </div>
 
             <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-3 mb-5">
               <PrimaryCta className="w-full sm:w-auto" />
@@ -104,27 +148,19 @@ export default async function HomePage() {
             <p className="text-xs text-slate-400">登録・相談無料｜今すぐ転職しない方もOK</p>
           </div>
 
-          <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-            <div className="relative aspect-[4/5] sm:aspect-[5/4] lg:aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-xl">
+          <div className="relative mx-auto w-full max-w-sm sm:max-w-md lg:max-w-none">
+            <div className="pointer-events-none absolute -top-4 right-6 sm:right-10 w-14 h-14 sm:w-20 sm:h-20 rounded-full border-4 border-brand-200/70 z-10" />
+            <div className="pointer-events-none absolute -bottom-6 -left-6 w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-brand-200/40 blur-md z-10" />
+            <div className="relative aspect-square rounded-full overflow-hidden shadow-xl ring-8 ring-white">
               <Image
                 src="/hero-nurses.jpg"
                 alt="笑顔で働く看護師スタッフ"
                 fill
-                sizes="(min-width: 1024px) 480px, (min-width: 640px) 400px, 90vw"
+                sizes="(min-width: 1024px) 560px, (min-width: 640px) 420px, 90vw"
                 priority
                 className="object-cover"
+                style={{ objectPosition: "62% 42%" }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-900/60 via-brand-900/0 to-transparent" />
-              <div className="relative h-full flex flex-col justify-end px-8 pb-8">
-                <p className="text-white text-lg sm:text-xl font-bold leading-relaxed drop-shadow">
-                  笑顔で働ける場所を、<br />一緒に見つけよう。
-                </p>
-              </div>
-            </div>
-            <div className="hidden sm:block absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-lg px-5 py-4 max-w-[220px]">
-              <p className="text-xs text-slate-400 mb-1">Recriveのご利用</p>
-              <p className="text-2xl font-black text-brand-600">¥0</p>
-              <p className="text-xs text-slate-500">求職者の方は完全無料</p>
             </div>
           </div>
         </div>
