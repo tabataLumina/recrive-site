@@ -78,55 +78,21 @@ export default async function HomePage() {
   return (
     <div>
       {/* 01 ファーストビュー */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-brand-50 via-brand-50/60 to-white">
-        <div className="pointer-events-none absolute -top-16 -right-16 w-72 h-72 rounded-full bg-gold-400/40 blur-2xl" />
-        <div className="pointer-events-none absolute top-40 -left-24 w-64 h-64 rounded-full bg-brand-200/50 blur-2xl" />
-
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 pt-14 sm:pt-20 pb-16 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-          <div className="text-center lg:text-left">
-            <p className="text-brand-600 font-bold tracking-[0.2em] text-xs sm:text-sm mb-5 uppercase">Care meets Career</p>
-            <h1 className="text-4xl sm:text-6xl font-black tracking-tight mb-6 leading-[1.15]">
-              想像以上の<br />仕事に出会おう。
-            </h1>
-            <p className="text-base sm:text-lg font-bold text-slate-700 mb-6 leading-relaxed">
-              あなたの「こう働きたい」から探す、<br className="sm:hidden" />
-              医療・介護に特化した求人サイト。
-            </p>
-            <p className="text-slate-500 max-w-md mx-auto lg:mx-0 mb-10 leading-relaxed">
-              給与や勤務地だけではなく、あなたの経験、価値観、これから叶えたいことまで。
-              Recriveが、あなたに合う仕事との出会いをつくります。
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-3 mb-5">
-              <PrimaryCta className="w-full sm:w-auto" />
-              <SecondaryCta className="w-full sm:w-auto" />
-            </div>
-            <p className="text-xs text-slate-400">登録・相談無料｜今すぐ転職しない方もOK</p>
+      <section className="bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12">
+          <Image
+            src="/hero-banner.png"
+            alt="医療・福祉に、笑顔をつなぐ。Recrive"
+            width={1536}
+            height={1024}
+            priority
+            className="w-full h-auto rounded-2xl sm:rounded-3xl"
+          />
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-8 sm:mt-10">
+            <PrimaryCta className="w-full sm:w-auto" />
+            <SecondaryCta className="w-full sm:w-auto" />
           </div>
-
-          <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-            <div className="relative aspect-[4/5] sm:aspect-[5/4] lg:aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-xl">
-              <Image
-                src="/hero-nurses.jpg"
-                alt="笑顔で働く看護師スタッフ"
-                fill
-                sizes="(min-width: 1024px) 480px, (min-width: 640px) 400px, 90vw"
-                priority
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-900/60 via-brand-900/0 to-transparent" />
-              <div className="relative h-full flex flex-col justify-end px-8 pb-8">
-                <p className="text-white text-lg sm:text-xl font-bold leading-relaxed drop-shadow">
-                  笑顔で働ける場所を、<br />一緒に見つけよう。
-                </p>
-              </div>
-            </div>
-            <div className="hidden sm:block absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-lg px-5 py-4 max-w-[220px]">
-              <p className="text-xs text-slate-400 mb-1">Recriveのご利用</p>
-              <p className="text-2xl font-black text-brand-600">¥0</p>
-              <p className="text-xs text-slate-500">求職者の方は完全無料</p>
-            </div>
-          </div>
+          <p className="text-xs text-slate-400 text-center mt-4 pb-12 sm:pb-16">登録・相談無料｜今すぐ転職しない方もOK</p>
         </div>
       </section>
 
