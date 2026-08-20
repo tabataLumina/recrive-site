@@ -78,23 +78,14 @@ export default async function HomePage() {
   return (
     <div>
       {/* 01 ファーストビュー */}
-      <section className="bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12">
-          <Image
-            src="/hero-banner.png"
-            alt="医療・福祉に、笑顔をつなぐ。Recrive"
-            width={1536}
-            height={1024}
-            priority
-            className="w-full h-auto rounded-2xl sm:rounded-3xl"
-          />
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-8 sm:mt-10">
-            <PrimaryCta className="w-full sm:w-auto" />
-            <SecondaryCta className="w-full sm:w-auto" />
-          </div>
-          <p className="text-xs text-slate-400 text-center mt-4 pb-12 sm:pb-16">登録・相談無料｜今すぐ転職しない方もOK</p>
-        </div>
-      </section>
+      <Image
+        src="/hero-banner.png"
+        alt="医療・福祉に、笑顔をつなぐ。Recrive"
+        width={1536}
+        height={1024}
+        priority
+        className="w-full h-auto"
+      />
 
       {/* 02 共感セクション */}
       <Reveal className="max-w-3xl mx-auto px-4 sm:px-6 py-20 text-center block">
