@@ -116,16 +116,16 @@ export default async function HomePage() {
       {/* 03 Recriveのコンセプト (Vision) */}
       <section id="vision" className="bg-white scroll-mt-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-20 sm:py-28">
-          <div className="grid grid-cols-1 lg:grid-cols-[57%_43%] gap-10 lg:gap-16 lg:items-center lg:min-h-[680px]">
+          <div className="grid grid-cols-1 lg:grid-cols-[57%_43%] gap-10 lg:gap-16 lg:items-center">
             <Reveal className="block">
-              <div className="relative w-full aspect-[4/5] sm:aspect-[16/10] lg:aspect-[4/5] rounded-[28px] overflow-hidden">
+              <div className="relative w-full aspect-[4/3] sm:aspect-[3/2] lg:aspect-[3/2] rounded-[28px] overflow-hidden">
                 <Image
-                  src="/vision-nurses.jpg"
-                  alt="青空の下で笑顔を見せる3人の医療従事者"
+                  src="/vision-nurses-2.png"
+                  alt="笑顔でミーティングをする3人の医療従事者"
                   fill
                   sizes="(min-width: 1024px) 620px, 100vw"
                   className="object-cover"
-                  style={{ objectPosition: "58% 38%" }}
+                  style={{ objectPosition: "50% 45%" }}
                 />
               </div>
             </Reveal>
